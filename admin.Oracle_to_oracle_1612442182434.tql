@@ -1,0 +1,21 @@
+
+CREATE APPLICATION Oracle_to_oracle;
+
+CREATE OR REPLACE TARGET Oracle_target USING Global.DatabaseWriter ( 
+  ConnectionRetryPolicy: 'retryInterval=30, maxRetries=3', 
+  Password: 'tQp4xhn3J+H+uid2Xw2p47MW0lJ5rVRnu9GsKjDpOm0=', 
+  ParallelThreads: '', 
+  DatabaseProviderType: 'Oracle', 
+  CheckPointTable: 'CHKPOINT', 
+  Password_encrypted: 'true', 
+  CommitPolicy: 'EventCount:100,Interval:60', 
+  StatementCacheSize: '50', 
+  BatchPolicy: 'EventCount:100,Interval:60', 
+  ConnectionURL: 'jdbc:oracle:thin:@localhost:1521/xe', 
+  Username: 'indium', 
+  PreserveSourceTransactionBoundary: 'false', 
+  Tables: 'INDIUM.EMPLOYEE,INDIUM.STUDENT;' ) 
+INPUT FROM oracle_src_op;
+
+END APPLICATION Oracle_to_oracle;
+
